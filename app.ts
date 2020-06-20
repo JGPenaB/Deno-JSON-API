@@ -1,4 +1,4 @@
-import { Application, isHttpError, Status } from "https://deno.land/x/oak@v5.2.0/mod.ts";
+import { Application, isHttpError, Status } from "./dependencies.ts";
 import {HOST, PORT} from "./config/config.ts";
 
 //Importing routes
