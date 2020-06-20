@@ -5,8 +5,9 @@ let envs = config();
 
 const client = new Client({
     hostname: envs.HOST,
-    port: envs.PORT,
+    port: parseInt(envs.PORT),
     user: envs.USER,
+    password: envs.PASSWORD,
     database: envs.DATABASE
 });
 
