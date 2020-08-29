@@ -4,7 +4,7 @@ import { userList } from "../controllers/userController.ts";
 const userRoutes = new Router();
 
 userRoutes
-
-.get("/users", userList);
+.get("/users", userList)
+.post("/users", userList);
 
 export default userRoutes;
