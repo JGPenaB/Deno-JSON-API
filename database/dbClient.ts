@@ -3,7 +3,7 @@ import { config } from "../dependencies.ts";
 
 let envs = config();
 
-const client = new Client({
+const dbClient = new Client({
     hostname: envs.HOST,
     port: parseInt(envs.PORT),
     user: envs.USER,
@@ -11,4 +11,4 @@ const client = new Client({
     database: envs.DATABASE
 });
 
-export default client;
+export default dbClient;
