@@ -1,13 +1,14 @@
 import { Router } from "../dependencies.ts";
-import { userList, userByID, newUser, deleteUser, editUser } from "../controllers/userController.ts";
+import { userController } from "../controllers/userController.ts";
+import { validateBody } from "../middlewares/validateBody.ts";
 
 const userRoutes = new Router();
 
-userRoutes
-.get("/users", userList)
-.get("/users/:id",userByID)
-.post("/users", newUser)
-.put("/users/:id", editUser)
-.delete("/users/:id", deleteUser);
+const methods: userController = new userController;
 
-export default userRoutes;
+export default userRoutes
+    .get("/users", methods.read)
+    .get("/users/:id",methods.read)
+    .post("/users", validateBody, methods.create)
+    .put("/users/:id", validateBody, methods.update)
+    .delete("/users/:id", methods.delete);
