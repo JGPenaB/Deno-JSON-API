@@ -1,5 +1,5 @@
 import { getUserByEmail } from "../services/userService.ts";
-
+import { User } from "../database/types/user.ts";
 import { Controller } from "../interfaces/controllerInterface.ts";
 import { bcrypt } from "../dependencies.ts";
 import { makeJwt, setExpiration, Jose, Payload } from "../dependencies.ts";
@@ -26,15 +26,15 @@ export class loginController implements Controller {
         }
 
         //Verifica si el email existe
-        const emailFound: any = await getUserByEmail(body.value["email"]);
+        const emailFound: User = await getUserByEmail(body.value["email"]);
         if(emailFound !== undefined){
-            let result = bcrypt.compare(emailFound[2],body.value["contrasena"]);
+            let result = bcrypt.compare(emailFound.contrasena || "",body.value["contrasena"]);
 
             if(result){
 
                 //Si el email existe y la contraseña coincide, crea el token 
                 const payload: Payload = {
-                    iss: emailFound[0],
+                    iss: String(emailFound.id),
                     exp: setExpiration(new Date().getTime() + 50000),
                 };
                 const jwt = makeJwt({ key, header, payload });
