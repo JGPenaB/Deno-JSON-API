@@ -73,8 +73,8 @@ export class userController implements Controller {
         let encrypted = await bcrypt.hash(body.value["contrasena"]);
 
         //Creando el usuario
-        const found: any = await createUser({
-            nombre: body.value["nombre"],
+        const found: any = await createUser(<User>{
+            username: body.value["nombre"],
             email: body.value["email"],
             contrasena: encrypted,
         });
@@ -114,8 +114,8 @@ export class userController implements Controller {
         let encrypted = await bcrypt.hash(body.value["contrasena"]);
 
         //Editando el usuario
-        const found: any = await modifyUser({
-            nombre: body.value["nombre"],
+        const found: any = await modifyUser(<User>{
+            username: body.value["nombre"],
             email: body.value["email"],
             contrasena: encrypted,
         }, context.params.id);

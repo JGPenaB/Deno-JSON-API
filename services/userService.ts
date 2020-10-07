@@ -52,16 +52,16 @@ async function getUserByEmail(Email: any){
     }
 }
 
-async function createUser(userData: any){
+async function createUser(userData: User){
     await client.connect();
-    const result = await client.query("INSERT INTO Usuarios(Nombre, Email, Contrasena) VALUES($1,$2,$3)",userData.nombre,userData.email,userData.contrasena);
+    const result = await client.query("INSERT INTO Usuarios(Nombre, Email, Contrasena) VALUES($1,$2,$3)",userData.username,userData.email,userData.contrasena);
     await client.end();
     return result.rows[0];
 }
 
-async function modifyUser(userData: any, ID: any){
+async function modifyUser(userData: User, ID: any){
     await client.connect();
-    const result = await client.query("UPDATE Usuarios SET Nombre = $1, Email = $2, Contrasena = $3 WHERE ID = $4",userData.nombre,userData.email,userData.contrasena,ID);
+    const result = await client.query("UPDATE Usuarios SET Nombre = $1, Email = $2, Contrasena = $3 WHERE ID = $4",userData.username,userData.email,userData.contrasena,ID);
     await client.end();
     return result.rows[0];
 }

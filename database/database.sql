@@ -23,7 +23,7 @@ CREATE TABLE Cuentas(
     ID serial PRIMARY KEY,
     ID_Usuario integer NOT NULL,
     Tipo varchar(64) NOT NULL,
-    Balance real NOT NULL,
+    Saldo real NOT NULL,
     FOREIGN KEY(ID_Usuario) REFERENCES Usuarios(ID) ON DELETE CASCADE
 );
 
@@ -33,5 +33,6 @@ CREATE TABLE Transacciones(
     ID_Cuenta integer NOT NULL,
     Concepto varchar(256) NOT NULL,
     Monto real NOT NULL,
+    Ingreso boolean NOT NULL,
     FOREIGN KEY(ID_Cuenta) REFERENCES Cuentas(ID) ON DELETE CASCADE
 );
