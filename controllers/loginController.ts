@@ -31,12 +31,12 @@ export class loginController implements Controller {
             let result = bcrypt.compare(emailFound[2],body.value["contrasena"]);
 
             if(result){
+
+                //Si el email existe y la contraseña coincide, crea el token 
                 const payload: Payload = {
                     iss: emailFound[0],
                     exp: setExpiration(new Date().getTime() + 50000),
                 };
-            
-                //create jwt previous condition ok
                 const jwt = makeJwt({ key, header, payload });
 
                 if(jwt){
@@ -46,7 +46,6 @@ export class loginController implements Controller {
                     };
                     context.response.status = 200;
                 }
-
                 
             }else{
                 context.response.body = {data: "Credenciales inválidas."};

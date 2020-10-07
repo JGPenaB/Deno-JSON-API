@@ -12,7 +12,7 @@ export async function validateBody(context: any, next: any){
             return;
         }
     }else{
-        context.response.body = {data: "No se ha enviado ningún dato."};
+        context.response.body = {data: "No se ha recibido ningún dato."};
         context.response.status = 400;
         return;
     }

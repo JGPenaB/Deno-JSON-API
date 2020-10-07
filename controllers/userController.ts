@@ -6,7 +6,6 @@ import {getUsers,
     modifyUser} from "../services/userService.ts";
 
 import { Controller } from "../interfaces/controllerInterface.ts";
-
 import { bcrypt } from "../dependencies.ts";
 
 export class userController implements Controller {
@@ -95,6 +94,13 @@ export class userController implements Controller {
             }
         }
 
+        //Verifica si un usuario intenta alterar los datos de otro usuario
+        if(context.request.tokenInfo.iss !== context.params.id){
+            context.response.body = {data: "Acción no permitida."};
+            context.response.status = 401;
+            return;
+        }
+
         //Verifica si el email no está en uso
         const emailFound: any = await getUserByEmail(body.value["email"]);
         if(emailFound !== undefined && emailFound[0] != context.params.id){
@@ -123,6 +129,13 @@ export class userController implements Controller {
         if(userFound === undefined){
             context.response.body = {data: "No se encontró ningún usuario."};
             context.response.status = 404;
+            return;
+        }
+
+        //Verifica si un usuario intenta alterar los datos de otro usuario
+        if(context.request.tokenInfo.iss !== context.params.id){
+            context.response.body = {data: "Acción no permitida."};
+            context.response.status = 401;
             return;
         }
 
