@@ -7,6 +7,8 @@ import {getUsers,
 
 import { Controller } from "../interfaces/controllerInterface.ts";
 
+import { bcrypt } from "../dependencies.ts";
+
 export class userController implements Controller {
     async read(context: any){
         let jsonData: any;
@@ -67,11 +69,13 @@ export class userController implements Controller {
             return;
         }
         
+        let encrypted = await bcrypt.hash(body.value["contrasena"]);
+
         //Creando el usuario
         const found: any = await createUser({
             nombre: body.value["nombre"],
             email: body.value["email"],
-            contrasena: body.value["contrasena"],
+            contrasena: encrypted,
         });
 
         context.response.body = {data: "Usuario creado exitosamente."};
@@ -99,11 +103,13 @@ export class userController implements Controller {
             return;
         }
         
+        let encrypted = await bcrypt.hash(body.value["contrasena"]);
+
         //Editando el usuario
         const found: any = await modifyUser({
             nombre: body.value["nombre"],
             email: body.value["email"],
-            contrasena: body.value["contrasena"],
+            contrasena: encrypted,
         }, context.params.id);
 
         context.response.body = {data: "Usuario editado exitosamente."};
