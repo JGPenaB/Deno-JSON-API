@@ -15,6 +15,7 @@ CREATE TABLE Perfil(
     Nombres varchar(128),
     Apellidos varchar(128),
     Fecha_Nacimiento date,
+    Pais varchar(128),
     FOREIGN KEY(ID_Usuario) REFERENCES Usuarios(ID) ON DELETE CASCADE
 );
 
