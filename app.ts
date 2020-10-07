@@ -4,6 +4,7 @@ import { Application, isHttpError, Status } from "./dependencies.ts";
 import userRoutes from "./routes/userRoutes.ts";
 import loginRoutes from "./routes/loginRoutes.ts";
 import accountRoutes from "./routes/accountRoutes.ts";
+import transactionRoutes from "./routes/transactionRoutes.ts";
 
 const app = new Application();
 
@@ -37,5 +38,7 @@ app.use(loginRoutes.routes());
 app.use(loginRoutes.allowedMethods());
 app.use(accountRoutes.routes());
 app.use(accountRoutes.allowedMethods());
+app.use(transactionRoutes.routes());
+app.use(transactionRoutes.allowedMethods());
 
 export {app};
