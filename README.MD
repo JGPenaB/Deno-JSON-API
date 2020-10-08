@@ -1,13 +1,18 @@
 JSON API sencilla hecho en Deno con deno-postgres.
 
+## Documentación
+
+https://documenter.getpostman.com/view/11506886/TVRj4nbJ
+
 ## Instalación
 
 ```
 $ git clone https://github.com/JGPenaB/Deno-JSON-API.git
 $ cd Deno-JSON-API
 ```
+Crea una base de datos y ejecuta el archivo `database.sql`, ubicado en `database/`, para inicializar la base de datos.
 
-Crea un archivo .env con los siguientes datos:
+Luego, crea un archivo .env con los siguientes datos:
 ```
 HOST= host del sitio (localhost)
 PORT= puerto del sitio
